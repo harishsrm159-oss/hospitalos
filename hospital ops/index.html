@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HospitalOps Intelligence — Coordinated Hospital Recovery Platform</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Top Global Application Header -->
+  <header class="app-header">
+    <div class="brand-section">
+      <div class="brand-logo-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+      </div>
+      <div class="brand-title">
+        <div class="brand-name">HOSPITAL<span>OPS</span></div>
+        <div class="brand-subtitle">INTELLIGENCE PLATFORM</div>
+      </div>
+    </div>
+
+    <!-- Navigation Tabs for all Presentation Views -->
+    <nav class="top-nav">
+      <button class="nav-tab-btn active" data-view="overview">🎯 Executive Pitch</button>
+      <button class="nav-tab-btn" data-view="dashboard">🖥️ Operations Center</button>
+      <button class="nav-tab-btn" data-view="impact-map">🕸️ Impact Map</button>
+      <button class="nav-tab-btn" data-view="scenario1">⚖️ Scenario 1: Recovery</button>
+      <button class="nav-tab-btn" data-view="scenario2">🔗 Scenario 2: Correlator</button>
+      <button class="nav-tab-btn" data-view="whatif">⚡ What-If Simulator</button>
+      <button class="nav-tab-btn" data-view="architecture">🏛️ Architecture & RBAC</button>
+      <button class="nav-tab-btn" data-view="metrics">🧪 Metrics & Tests</button>
+      <button class="nav-tab-btn deck-mode-btn" data-view="slides">📑 13-Slide Deck Mode</button>
+    </nav>
+
+    <!-- Role Switcher & Live Sim Badge -->
+    <div class="header-actions">
+      <div class="live-badge">
+        <span class="pulse-dot"></span> LIVE SIMULATION
+      </div>
+
+      <div class="role-switcher">
+        <span class="role-label">Role:</span>
+        <select id="role-selector" class="role-select">
+          <option value="operations_analyst" selected>Operations Analyst</option>
+          <option value="technician">Technician</option>
+          <option value="department_manager">Department Manager</option>
+          <option value="procurement_approver">Procurement Approver</option>
+          <option value="system_admin">System Administrator</option>
+        </select>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Container -->
+  <main class="app-container">
+
+    <!-- ====================================================================
+         VIEW 1: EXECUTIVE OVERVIEW & PITCH (Slides 1, 2, 3, 13)
+         ==================================================================== -->
+    <section id="view-overview" class="view-section active">
+      <!-- Hero Pitch (Slide 1) -->
+      <div class="hero-card">
+        <div class="badge-tag">HACKATHON PITCH • HEALTHCARE OPERATIONS</div>
+        <h1 class="hero-title">From hospital disruptions to <span>coordinated recovery.</span></h1>
+        <p class="hero-description">
+          An AI-assisted hospital operations platform that connects incidents, equipment, staffing, inventory, and approvals — through one web workspace and a mobile companion.
+        </p>
+
+        <div class="hero-pillars">
+          <div class="pillar-chip">✨ IMPACT INTELLIGENCE</div>
+          <div class="pillar-chip">⚙️ RECOVERY PLANNING</div>
+          <div class="pillar-chip">🛡️ CONTROLLED ACTIONS</div>
+          <div class="pillar-chip" style="color: var(--text-muted); border-style: dashed;">PROTOTYPE CONCEPT • SYNTHETIC OPERATIONAL DATA</div>
+        </div>
+
+        <div class="hero-metrics-grid">
+          <div class="stat-card red">
+            <div class="stat-header">
+              <span class="stat-label">Active Incidents</span>
+              <div class="stat-icon">⚠️</div>
+            </div>
+            <div class="stat-number" id="metric-active-incidents">08</div>
+            <div class="stat-context">Across radiology, IT, and surgical suites</div>
+          </div>
+
+          <div class="stat-card amber">
+            <div class="stat-header">
+              <span class="stat-label">Awaiting Approval</span>
+              <div class="stat-icon">⏳</div>
+            </div>
+            <div class="stat-number" id="metric-pending-approvals">03</div>
+            <div class="stat-context">Requires department manager sign-off</div>
+          </div>
+
+          <div class="stat-card red">
+            <div class="stat-header">
+              <span class="stat-label">Assets Offline</span>
+              <div class="stat-icon">🛑</div>
+            </div>
+            <div class="stat-number" id="metric-assets-offline">02</div>
+            <div class="stat-context">MRI Scanner 3T & Core Network Switch</div>
+          </div>
+
+          <div class="stat-card emerald">
+            <div class="stat-header">
+              <span class="stat-label">SLA on Track</span>
+              <div class="stat-icon">📈</div>
+            </div>
+            <div class="stat-number" id="metric-sla-track">94%</div>
+            <div class="stat-context">Within maximum delay tolerance</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- The Challenge (Slide 2) -->
+      <div class="grid-2col">
+        <div class="panel-box">
+          <h2 class="panel-heading">⚡ One incident rarely stays one incident.</h2>
+          <p class="panel-sub">Hospital operations are connected — but operational information is often fragmented.</p>
+
+          <div class="trigger-card">
+            <div class="trigger-tag">TRIGGER EVENT</div>
+            <div class="trigger-title">MRI scanner unavailable</div>
+            <div class="trigger-desc">A single equipment failure creates an immediate chain of operational dependencies.</div>
+          </div>
+
+          <div class="ripple-list">
+            <div class="ripple-item">
+              <span class="ripple-num blue">01</span>
+              <div class="ripple-content">
+                <h4>Scheduled activities</h4>
+                <p>Which 12 patient scans depend on this asset today?</p>
+              </div>
+            </div>
+            <div class="ripple-item">
+              <span class="ripple-num green">02</span>
+              <div class="ripple-content">
+                <h4>People & skills</h4>
+                <p>Who is qualified to respond? Regular technician is currently busy.</p>
+              </div>
+            </div>
+            <div class="ripple-item">
+              <span class="ripple-num amber">03</span>
+              <div class="ripple-content">
+                <h4>Parts & inventory</h4>
+                <p>Is the required RF cryo-valve component in stock or reserved?</p>
+              </div>
+            </div>
+            <div class="ripple-item">
+              <span class="ripple-num rose">04</span>
+              <div class="ripple-content">
+                <h4>Approvals & updates</h4>
+                <p>Who must authorize, act, and be notified under policy?</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel-box">
+          <h2 class="panel-heading">📁 The Fragmented Workflow</h2>
+          <p class="panel-sub">Today, hospital staff battle disconnected data silos when disruptions strike.</p>
+
+          <div class="silo-grid">
+            <div class="silo-card">
+              <h5>✉️ Email inbox</h5>
+              <p>Reports arrive in disparate places with varying urgency.</p>
+            </div>
+            <div class="silo-card">
+              <h5>📊 Asset spreadsheet</h5>
+              <p>Equipment maintenance records are static and separate.</p>
+            </div>
+            <div class="silo-card">
+              <h5>📋 Staff roster</h5>
+              <p>Shift availability and qualifications are hard to cross-reference.</p>
+            </div>
+            <div class="silo-card">
+              <h5>📞 Phone calls</h5>
+              <p>Critical approvals and updates get missed in the noise.</p>
+            </div>
+          </div>
+
+          <div class="gap-banner" style="margin-top: 1.5rem;">
+            <strong>THE GAP:</strong> Hospitals do not need just another ticketing tool. They need a way to coordinate a safe, feasible response.
+          </div>
+
+          <!-- The Takeaway Loop (Slide 13) -->
+          <div style="margin-top: 1.5rem; background: var(--bg-subtle); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1.25rem;">
+            <div style="font-size: 0.78rem; font-weight: 800; color: var(--teal-accent); text-transform: uppercase; margin-bottom: 0.5rem;">THE HOSPITAL OPERATIONS LOOP</div>
+            <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; font-weight: 700; color: #fff; margin-bottom: 0.75rem;">
+              <span>Incident</span> ➔ <span>Impact</span> ➔ <span>Recovery Plan</span> ➔ <span>Approval</span> ➔ <span>Execution</span>
+            </div>
+            <p style="font-size: 0.78rem; color: var(--text-secondary); font-style: italic;">
+              “Don’t just log the failure. Coordinate the recovery. A reviewable plan. A controlled action. A traceable outcome.”
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Our Approach (Slide 3) -->
+      <div class="panel-box" style="margin-bottom: 2rem;">
+        <h2 class="panel-heading">🧭 From fragmented signals to a controlled response.</h2>
+        <p class="panel-sub">One shared workflow connects reporting, impact analysis, recovery decisions and execution.</p>
+
+        <div class="pipeline-track">
+          <div class="step-card">
+            <div class="step-num">01</div>
+            <div class="step-title">Capture</div>
+            <div class="step-desc">Form, chat or simulated webhook intake</div>
+            <div class="step-tag intake">INTAKE</div>
+          </div>
+          <div class="step-card">
+            <div class="step-num">02</div>
+            <div class="step-title">Connect</div>
+            <div class="step-desc">Link assets, reports, rooms and schedules</div>
+            <div class="step-tag correlate">CORRELATE</div>
+          </div>
+          <div class="step-card">
+            <div class="step-num">03</div>
+            <div class="step-title">Assess</div>
+            <div class="step-desc">Check impact, availability and constraints</div>
+            <div class="step-tag deterministic">DETERMINISTIC</div>
+          </div>
+          <div class="step-card">
+            <div class="step-num">04</div>
+            <div class="step-title">Recommend</div>
+            <div class="step-desc">Compare feasible recovery options with trade-offs</div>
+            <div class="step-tag ai">AI-ASSISTED</div>
+          </div>
+          <div class="step-card">
+            <div class="step-num">05</div>
+            <div class="step-title">Approve & act</div>
+            <div class="step-desc">Revalidate, simulate and audit actions</div>
+            <div class="step-tag controlled">CONTROLLED</div>
+          </div>
+        </div>
+
+        <div class="boundary-banner">
+          <div class="boundary-half ai">
+            <div class="boundary-title">🤖 AI ASSISTS</div>
+            <div class="boundary-list">
+              Report understanding • Duplicate suggestions • Impact summaries • Recommendation explanations
+            </div>
+          </div>
+          <div class="boundary-half rules">
+            <div class="boundary-title">⚖️ RULES ENFORCE</div>
+            <div class="boundary-list">
+              Backend permissions • Physical stock • Work schedules • Technician qualifications • Approval checks
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         VIEW 2: OPERATIONS CONTROL CENTER (Slide 1 & Slide 4 Dual View)
+         ==================================================================== -->
+    <section id="view-dashboard" class="view-section">
+      <div class="view-mode-bar">
+        <div>
+          <h2 style="font-size: 1.5rem; font-weight: 800; color: #fff;">One operational picture — on web and mobile.</h2>
+          <p style="font-size: 0.85rem; color: var(--text-secondary);">A shared incident record keeps the dashboard, field updates, approvals, and audit history in sync.</p>
+        </div>
+        <div class="view-mode-toggle">
+          <button class="mode-btn active" data-mode="dual" onclick="window.HospitalOps.setDualMode('dual')">Dual View</button>
+          <button class="mode-btn" data-mode="web" onclick="window.HospitalOps.setDualMode('web')">Web Workspace</button>
+          <button class="mode-btn" data-mode="mobile" onclick="window.HospitalOps.setDualMode('mobile')">Mobile Companion</button>
+        </div>
+      </div>
+
+      <div id="dual-surface-container" class="dual-container">
+        <!-- Web Workspace Column (hospitalops.app / operations) -->
+        <div class="web-column">
+          <div class="web-workspace-frame">
+            <div class="browser-header">
+              <div class="browser-dots">
+                <span class="dot red"></span>
+                <span class="dot yellow"></span>
+                <span class="dot green"></span>
+              </div>
+              <div class="browser-address">https://hospitalops.app/operations</div>
+              <button id="open-intake-modal-btn" class="btn-primary" style="padding: 0.25rem 0.75rem; font-size: 0.75rem; margin-left: auto;">
+                + Report Incident
+              </button>
+            </div>
+
+            <div class="workspace-content">
+              <!-- Active Disruptions Table -->
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <h3 style="font-size: 1.1rem; font-weight: 700; color: #fff;">Active Disruptions</h3>
+                <span style="font-size: 0.75rem; color: var(--text-muted);">Real-time synchronized queue</span>
+              </div>
+
+              <div class="disruptions-table-wrap">
+                <table class="disruptions-table">
+                  <thead>
+                    <tr>
+                      <th>Incident</th>
+                      <th>Location</th>
+                      <th>Status</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody id="disruptions-table-body">
+                    <!-- Dynamic Rows populated by app.js -->
+                  </tbody>
+                </table>
+              </div>
+
+              <!-- Highlighted Recovery Recommendation (PLAN V2) -->
+              <div class="recovery-plan-card">
+                <div class="plan-header">
+                  <span class="plan-tag">PLAN V2</span>
+                  <span style="font-size: 0.72rem; color: var(--amber); font-weight: 700;">APPROVAL REQUIRED</span>
+                </div>
+                <div class="plan-title" id="active-plan-title">Use verified alternate scanner (1.5T-B)</div>
+                <div class="plan-note" id="active-plan-note">Capacity check verified. Technician reassignment required before execution.</div>
+                <div style="display: flex; gap: 0.75rem;">
+                  <button class="btn-primary" onclick="window.HospitalOps.approveRecoveryOption('Plan V2: Alternate Scanner')">
+                    Review & Approve Plan
+                  </button>
+                  <button class="btn-secondary" onclick="window.HospitalOps.switchView('scenario1')">
+                    Compare All 3 Options
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mobile Companion Column (Slide 4 Mobile Screen) -->
+        <div class="mobile-column">
+          <div class="mobile-phone">
+            <div class="phone-notch"></div>
+            <div class="phone-screen">
+              <div class="phone-top-bar">
+                <span>09:41</span>
+                <span>📶 5G  🔋 98%</span>
+              </div>
+
+              <div class="mobile-greeting">
+                <h3>Good morning, Ops</h3>
+                <p>Hospital status snapshot</p>
+              </div>
+
+              <div class="mobile-stats-row">
+                <div class="mobile-stat-box">
+                  <div class="num" style="color: var(--rose);">08</div>
+                  <div class="lbl">Open Incidents</div>
+                </div>
+                <div class="mobile-stat-box">
+                  <div class="num" style="color: var(--amber);">03</div>
+                  <div class="lbl">Pending Approvals</div>
+                </div>
+              </div>
+
+              <div class="mobile-alerts-title">My Alerts</div>
+              <div id="mobile-alerts-list">
+                <!-- Dynamically populated mobile alerts -->
+              </div>
+
+              <div class="phone-bottom-action">
+                <button class="btn-primary" onclick="window.HospitalOps.switchView('impact-map')">
+                  View Incident Impact
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         VIEW 3: IMPACT MAP & INCIDENT TIMELINE (Slide 5)
+         ==================================================================== -->
+    <section id="view-impact-map" class="view-section">
+      <div style="margin-bottom: 1.5rem;">
+        <h2 style="font-size: 1.5rem; font-weight: 800; color: #fff;">Every incident becomes a connected operational record.</h2>
+        <p style="font-size: 0.85rem; color: var(--text-secondary);">HospitalOps links the report to the resources, schedules, and decisions needed for recovery.</p>
+      </div>
+
+      <div class="impact-container">
+        <!-- Chronological Timeline (Slide 5 Left Column) -->
+        <div class="timeline-card">
+          <h3 style="font-size: 1.05rem; font-weight: 800; color: #fff; margin-bottom: 0.25rem;">INCIDENT TIMELINE</h3>
+          <p style="font-size: 0.75rem; color: var(--text-muted);">Incident #INC-4091 • Diagnostic Audit Log</p>
+
+          <div class="timeline-list">
+            <div class="timeline-item">
+              <div class="timeline-dot cyan"></div>
+              <div class="timeline-time">09:02</div>
+              <div class="timeline-title">Report received</div>
+              <div class="timeline-detail">MRI scanner failure reported via Nurse Desk console</div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot cyan"></div>
+              <div class="timeline-time">09:03</div>
+              <div class="timeline-title">AI parsed details</div>
+              <div class="timeline-detail">Asset: Siemens Skyra 3T + Department: Imaging extracted</div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot amber"></div>
+              <div class="timeline-time">09:04</div>
+              <div class="timeline-title">Impact linked</div>
+              <div class="timeline-detail">12 scheduled diagnostic scan appointments identified</div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot rose"></div>
+              <div class="timeline-time">09:05</div>
+              <div class="timeline-title">Constraints checked</div>
+              <div class="timeline-detail">Technician busy with CT; RF valve confirmed in central stock</div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot emerald"></div>
+              <div class="timeline-time">09:06</div>
+              <div class="timeline-title">Plan proposed</div>
+              <div class="timeline-detail">Alternative resource Scanner 1.5T capacity check initiated</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Interactive SVG Impact Map (Slide 5 Right Graph) -->
+        <div class="impact-graph-card">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+            <div>
+              <h3 style="font-size: 1.1rem; font-weight: 800; color: #fff;">IMPACT MAP</h3>
+              <p style="font-size: 0.75rem; color: var(--text-muted);">One incident ➔ multiple linked operational records (Click nodes to inspect)</p>
+            </div>
+            <span class="badge-tag" style="margin-bottom: 0;">GRAPH VISUALIZER</span>
+          </div>
+
+          <div class="impact-svg-wrapper" id="impact-svg-container">
+            <!-- Rendered by app.js SVG Engine -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         VIEW 4: SCENARIO 01: RECOVERY ENGINE & TRADE-OFF MATRIX (Slide 6)
+         ==================================================================== -->
+    <section id="view-scenario1" class="view-section">
+      <div style="margin-bottom: 1.5rem;">
+        <h2 style="font-size: 1.5rem; font-weight: 800; color: #fff;">Compare recovery options before taking action.</h2>
+        <p style="font-size: 0.85rem; color: var(--text-secondary);">The recovery engine ranks feasible choices against time, cost, and operational impact — then explains the trade-offs.</p>
+      </div>
+
+      <div class="scenario-banner">
+        <span class="scenario-badge">SCENARIO</span>
+        <span class="scenario-context">MRI scanner offline • 12 scheduled activities • regular technician unavailable</span>
+        <span class="synthetic-pill">SYNTHETIC DEMO VALUES</span>
+      </div>
+
+      <div class="recovery-options-grid">
+        <!-- Option 1: Recommended -->
+        <div class="option-card recommended">
+          <div class="option-top-badge">RECOMMENDED IN THIS SIMULATION</div>
+          <div class="option-name">Use alternate scanner</div>
+          <div class="option-desc">Move eligible activities to a verified resource with available capacity (Scanner 1.5T-B).</div>
+          
+          <div class="option-metrics-row">
+            <div class="metric-cell">
+              <div class="label">ESTIMATED TIME</div>
+              <div class="val" style="color: var(--emerald);">30 min</div>
+            </div>
+            <div class="metric-cell">
+              <div class="label">ESTIMATED COST</div>
+              <div class="val" style="color: #fff;">₹1,000</div>
+            </div>
+          </div>
+
+          <div class="feasibility-chip emerald">FEASIBLE IF CAPACITY CHECK PASSES</div>
+
+          <button class="btn-primary" onclick="window.HospitalOps.approveRecoveryOption('Use alternate scanner')">
+            Authorize & Execute
+          </button>
+        </div>
+
+        <!-- Option 2: Expedite Replacement -->
+        <div class="option-card dependency">
+          <div class="option-top-badge">DEPENDENCY: SUPPLIER</div>
+          <div class="option-name">Expedite replacement part</div>
+          <div class="option-desc">Keep the repair path, but the recovery timing depends on supplier dispatch confirmation.</div>
+          
+          <div class="option-metrics-row">
+            <div class="metric-cell">
+              <div class="label">ESTIMATED TIME</div>
+              <div class="val" style="color: var(--amber);">~3 hours</div>
+            </div>
+            <div class="metric-cell">
+              <div class="label">ESTIMATED COST</div>
+              <div class="val" style="color: #fff;">₹8,000</div>
+            </div>
+          </div>
+
+          <div class="feasibility-chip amber">WAITING FOR STOCK CONFIRMATION</div>
+
+          <button class="btn-secondary" onclick="window.HospitalOps.approveRecoveryOption('Expedite replacement part')">
+            Select Option
+          </button>
+        </div>
+
+        <!-- Option 3: Reschedule -->
+        <div class="option-card tradeoff">
+          <div class="option-top-badge">SERVICE TRADE-OFF</div>
+          <div class="option-name">Reschedule activities</div>
+          <div class="option-desc">Reschedule affected appointments with the appropriate department review and notifications.</div>
+          
+          <div class="option-metrics-row">
+            <div class="metric-cell">
+              <div class="label">ESTIMATED TIME</div>
+              <div class="val" style="color: var(--indigo);">20 min admin</div>
+            </div>
+            <div class="metric-cell">
+              <div class="label">ESTIMATED COST</div>
+              <div class="val" style="color: #fff;">₹500</div>
+            </div>
+          </div>
+
+          <div class="feasibility-chip indigo">REQUIRES SCHEDULING REVIEW</div>
+
+          <button class="btn-secondary" onclick="window.HospitalOps.approveRecoveryOption('Reschedule activities')">
+            Select Option
+          </button>
+        </div>
+      </div>
+
+      <div class="rule-engine-footer">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <div>
+          <strong>Deterministic Rule Engine:</strong> Verifies resource capacity, technician qualifications, stock inventory, and approval policies before any recovery action can execute.
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         VIEW 5: SCENARIO 02: DUPLICATE CORRELATOR & WEBHOOK (Slide 7)
+         ==================================================================== -->
+    <section id="view-scenario2" class="view-section">
+      <div style="margin-bottom: 1.5rem;">
+        <h2 style="font-size: 1.5rem; font-weight: 800; color: #fff;">Many reports. One confirmed incident.</h2>
+        <p style="font-size: 0.85rem; color: var(--text-secondary);">Duplicate-aware incident handling turns repeated complaints into a coordinated response without losing the original reports.</p>
+      </div>
+
+      <div class="correlator-layout">
+        <!-- Left: Incoming Reports Stream -->
+        <div class="incoming-stream-card">
+          <h3 style="font-size: 0.95rem; font-weight: 800; color: #fff; text-transform: uppercase; margin-bottom: 1rem;">
+            INCOMING REPORTS (3)
+          </h3>
+
+          <div class="stream-item">
+            <div class="stream-item-top">
+              <span class="stream-dept">LABORATORY</span>
+              <span class="stream-time">10:02:11</span>
+            </div>
+            <div class="stream-quote">“Systems cannot connect to network.”</div>
+          </div>
+
+          <div class="stream-item">
+            <div class="stream-item-top">
+              <span class="stream-dept">BILLING DESK</span>
+              <span class="stream-time">10:02:25</span>
+            </div>
+            <div class="stream-quote">“Network connection unavailable.”</div>
+          </div>
+
+          <div class="stream-item">
+            <div class="stream-item-top">
+              <span class="stream-dept">ADMIN BLOCK</span>
+              <span class="stream-time">10:03:02</span>
+            </div>
+            <div class="stream-quote">“Shared applications are offline.”</div>
+          </div>
+        </div>
+
+        <!-- Center: Correlated Incident -->
+        <div class="correlated-center-box">
+          <div class="correlated-tag">CORRELATED INCIDENT</div>
+          <div class="correlated-title">Network outage</div>
+          <div class="correlated-meta">3 reports linked • originals retained in lineage</div>
+          <div class="correlated-id">Incident ID: INC-2048</div>
+        </div>
+
+        <!-- Right: Coordinated Response -->
+        <div class="coordinated-response-card">
+          <h3 style="font-size: 0.95rem; font-weight: 800; color: #fff; text-transform: uppercase; margin-bottom: 1rem;">
+            COORDINATED RESPONSE
+          </h3>
+
+          <div class="response-step-list">
+            <div class="response-step">
+              <span class="step-circle">01</span>
+              <div class="step-info">
+                <h5>Confirm common scope</h5>
+                <p>Check location, time, and affected services</p>
+              </div>
+            </div>
+            <div class="response-step">
+              <span class="step-circle">02</span>
+              <div class="step-info">
+                <h5>Assign qualified IT staff</h5>
+                <p>Validate shift, skill, and workload</p>
+              </div>
+            </div>
+            <div class="response-step">
+              <span class="step-circle">03</span>
+              <div class="step-info">
+                <h5>Escalate by policy</h5>
+                <p>Notify impacted departments</p>
+              </div>
+            </div>
+            <div class="response-step">
+              <span class="step-circle">04</span>
+              <div class="step-info">
+                <h5>Track to resolution</h5>
+                <p>Record updates and full audit trail</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Webhook Idempotency Simulation Console -->
+      <div class="webhook-sim-box">
+        <div class="webhook-controls">
+          <button class="btn-primary" onclick="window.HospitalOps.simulateWebhook()">
+            ⚡ Fire Webhook Event Payload
+          </button>
+          <span style="font-size: 0.8rem; color: var(--text-secondary);">
+            <strong>IDEMPOTENCY CHECK:</strong> Repeated webhook deliveries do not create duplicate incidents or repeated side effects.
+          </span>
+        </div>
+        <div class="console-terminal" id="webhook-console">
+          <div>[10:00:00] System webhook gateway active listening on endpoint /api/webhook/incidents</div>
+          <div>[10:01:00] Idempotency cache primed with zero deduplication collisions.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         VIEW 6: WHAT-IF SIMULATOR & DYNAMIC REVALIDATION (Slide 8)
+         ==================================================================== -->
+    <section id="view-whatif" class="view-section">
+      <div style="margin-bottom: 1.5rem;">
+        <h2 style="font-size: 1.5rem; font-weight: 800; color: #fff;">When the situation changes, the plan changes.</h2>
+        <p style="font-size: 0.85rem; color: var(--text-secondary);">A proposed recovery is not trusted forever: HospitalOps rechecks the world before execution.</p>
+      </div>
+
+      <div class="whatif-arena">
+        <!-- Left: Plan V1 -->
+        <div class="plan-state-box" id="whatif-v1-box">
+          <span class="plan-version-badge v1" id="whatif-v1-badge">PLAN V1 (ORIGINAL)</span>
+          <h3 style="font-size: 1.25rem; font-weight: 800; color: #fff;">Original recovery plan</h3>
+          
+          <div class="plan-items-checklist">
+            <div class="check-item">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Qualified technician assigned (Dr. Sarah)
+            </div>
+            <div class="check-item" id="whatif-v1-part">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Required part available (RF Cryo-Valve #CV-99)
+            </div>
+            <div class="check-item">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Schedule window identified (10:30 AM)
+            </div>
+          </div>
+
+          <div style="font-size: 0.75rem; font-weight: 700; color: var(--teal-accent);">
+            READY FOR MANAGER REVIEW
+          </div>
+        </div>
+
+        <!-- Middle: Event Injector -->
+        <div class="whatif-inject-col">
+          <button class="inject-btn" onclick="window.HospitalOps.injectWhatIfDisruption()">
+            <span class="inject-tag">💥 INJECT EVENT</span>
+            <span>Part Reserved by Another Work Order</span>
+          </button>
+          <button class="btn-secondary" style="font-size: 0.72rem; padding: 0.35rem 0.75rem;" onclick="window.HospitalOps.resetWhatIf()">
+            ↺ Reset State
+          </button>
+        </div>
+
+        <!-- Right: Plan V2 Recalculate & Propose -->
+        <div class="plan-state-box" id="whatif-v2-box" style="display: none; border-color: var(--teal-accent);">
+          <span class="plan-version-badge v2">PLAN V2 (RECALCULATED)</span>
+          <h3 style="font-size: 1.25rem; font-weight: 800; color: #fff;">Recalculate and propose</h3>
+          
+          <div class="plan-items-checklist">
+            <div class="check-item">
+              <span style="font-weight: 800; color: var(--teal-accent); font-family: var(--font-mono); margin-right: 4px;">1</span>
+              Recheck reservations (RF Cryo-Valve locked by Trauma)
+            </div>
+            <div class="check-item">
+              <span style="font-weight: 800; color: var(--teal-accent); font-family: var(--font-mono); margin-right: 4px;">2</span>
+              Find feasible alternative (Switch to Scanner 1.5T-B)
+            </div>
+            <div class="check-item">
+              <span style="font-weight: 800; color: var(--teal-accent); font-family: var(--font-mono); margin-right: 4px;">3</span>
+              Revalidate approvals with Department Manager
+            </div>
+          </div>
+
+          <div style="font-size: 0.75rem; font-weight: 700; color: var(--emerald);">
+            NEW PROPOSAL • AWAITING APPROVAL
+          </div>
+        </div>
+      </div>
+
+      <div class="gap-banner">
+        <strong>POLICY ENFORCEMENT:</strong> No stale plan is executed. The backend rechecks availability, stock, conflicts, and permissions at the point of action.
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         VIEW 7: ARCHITECTURE & RBAC GOVERNANCE (Slides 9 & 10)
+         ==================================================================== -->
+    <section id="view-architecture" class="view-section">
+      <div style="margin-bottom: 1.5rem;">
+        <h2 style="font-size: 1.5rem; font-weight: 800; color: #fff;">A practical architecture — AI with deterministic controls.</h2>
+        <p style="font-size: 0.85rem; color: var(--text-secondary);">The product separates natural-language assistance from the rules that govern operational decisions.</p>
+      </div>
+
+      <!-- 4-Tier Architecture Diagram (Slide 9) -->
+      <div class="arch-grid-4tier">
+        <div class="arch-tier-column">
+          <div class="arch-tier-title">01 / INPUTS</div>
+          <div class="arch-component-card">
+            <h5>Staff web form</h5>
+            <p>Direct manual intake interface</p>
+          </div>
+          <div class="arch-component-card">
+            <h5>Mobile companion</h5>
+            <p>Field updates & fast review</p>
+          </div>
+          <div class="arch-component-card">
+            <h5>Simulated webhook</h5>
+            <p>IoT & biomedical device streams</p>
+          </div>
+          <div class="arch-component-card">
+            <h5>CSV / JSON import</h5>
+            <p>EHR & PACS roster synchronizer</p>
+          </div>
+        </div>
+
+        <div class="arch-tier-column">
+          <div class="arch-tier-title">02 / APPLICATION LAYER</div>
+          <div class="arch-component-card">
+            <h5>React web UI</h5>
+            <p>Responsive ops workstation</p>
+          </div>
+          <div class="arch-component-card">
+            <h5>Mobile UI</h5>
+            <p>Touch-optimized technician view</p>
+          </div>
+          <div class="arch-component-card">
+            <h5>FastAPI backend</h5>
+            <p>High-throughput async server</p>
+          </div>
+          <div class="arch-component-card">
+            <h5>RBAC middleware</h5>
+            <p>Role boundary enforcement</p>
+          </div>
+        </div>
+
+        <div class="arch-tier-column">
+          <div class="arch-tier-title">03 / INTELLIGENCE & RULES</div>
+          <div class="arch-component-card" style="border-color: rgba(99, 102, 241, 0.4);">
+            <h5 style="color: #A5B4FC;">AI assistance</h5>
+            <p>Extract • Classify • Summarize • Explain</p>
+          </div>
+          <div class="arch-component-card" style="border-color: rgba(16, 185, 129, 0.4);">
+            <h5 style="color: #6EE7B7;">Deterministic rule engine</h5>
+            <p>Stock • Schedules • Skills • Approvals</p>
+          </div>
+          <div class="arch-component-card" style="border-left: 3px solid var(--teal-accent);">
+            <h5>Revalidation gate</h5>
+            <p>Locks state right before execution</p>
+          </div>
+        </div>
+
+        <div class="arch-tier-column">
+          <div class="arch-tier-title">04 / PERSISTENT DATA & OPS</div>
+          <div class="arch-component-card">
+            <h5>PostgreSQL</h5>
+            <p>Incidents • Assets • Stock • Schedules</p>
+          </div>
+          <div class="arch-component-card">
+            <h5>Audit log</h5>
+            <p>Actor • Action • Old/New state</p>
+          </div>
+          <div class="arch-component-card">
+            <h5>Notifications</h5>
+            <p>In-app alerts • Simulated dispatch</p>
+          </div>
+          <div class="arch-component-card">
+            <h5>Analytics</h5>
+            <p>SLA • Disruptions • Recovery progress</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- RBAC Governance Matrix (Slide 10) -->
+      <div class="rbac-table-wrap">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <div>
+            <h3 style="font-size: 1.15rem; font-weight: 800; color: #fff;">ROLE-BASED ACCESS CONTROL (RBAC)</h3>
+            <p style="font-size: 0.8rem; color: var(--text-secondary);">Trust is designed into the workflow. Operational decision-support prototype — not an autonomous clinical agent.</p>
+          </div>
+          <span style="font-size: 0.72rem; font-weight: 800; color: var(--amber); background: rgba(245, 158, 11, 0.1); padding: 0.35rem 0.75rem; border-radius: 4px;">
+            NO SELF-APPROVAL WHERE POLICY REQUIRES SEPARATION OF DUTIES
+          </span>
+        </div>
+
+        <table class="rbac-table">
+          <thead>
+            <tr>
+              <th>Role</th>
+              <th>Permitted Actions</th>
+              <th>Approval Policy Enforcement</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Operations Analyst</strong></td>
+              <td>Create / assess incidents, view telemetry</td>
+              <td><span class="perm-pill deny">Cannot Approve Plans</span></td>
+            </tr>
+            <tr>
+              <td><strong>Technician</strong></td>
+              <td>Update assigned work orders, report completion</td>
+              <td><span class="perm-pill deny">Cannot Approve Plans</span></td>
+            </tr>
+            <tr>
+              <td><strong>Department Manager</strong></td>
+              <td>Review recovery plans, authorize scanner reassignment</td>
+              <td><span class="perm-pill">Authorized Sign-off</span></td>
+            </tr>
+            <tr>
+              <td><strong>Procurement Approver</strong></td>
+              <td>Approve eligible purchases and expedite requisitions</td>
+              <td><span class="perm-pill">Purchase Authorized</span></td>
+            </tr>
+            <tr>
+              <td><strong>System Administrator</strong></td>
+              <td>Manage access, configuration, and security overrides</td>
+              <td><span class="perm-pill">Full Administrative</span></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Live Audit Trail Log -->
+        <div style="margin-top: 1.5rem;">
+          <h4 style="font-size: 0.85rem; font-weight: 800; color: var(--teal-accent); text-transform: uppercase; margin-bottom: 0.5rem;">
+            LIVE SYSTEM AUDIT LOG (Immutable)
+          </h4>
+          <div id="audit-log-items" style="background: var(--bg-subtle); border-radius: var(--radius-md); padding: 0.75rem 1rem;">
+            <!-- Rendered by app.js -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         VIEW 8: METRICS & AUTOMATED ACCEPTANCE SUITE (Slides 11 & 12)
+         ==================================================================== -->
+    <section id="view-metrics" class="view-section">
+      <div style="margin-bottom: 1.5rem;">
+        <h2 style="font-size: 1.5rem; font-weight: 800; color: #fff;">We measure whether recovery is actually better.</h2>
+        <p style="font-size: 0.85rem; color: var(--text-secondary);">The prototype reports auditable operational metrics — not invented claims about real hospital outcomes.</p>
+      </div>
+
+      <!-- 4 Core Metrics (Slide 11 Top) -->
+      <div class="metrics-row-4col">
+        <div class="metric-audit-box">
+          <div class="seq">01</div>
+          <div class="name">Time to correlate</div>
+          <div class="question">How quickly are related reports linked?</div>
+          <div style="font-size: 1.75rem; font-weight: 800; color: var(--teal-accent); font-family: var(--font-mono); margin-top: 0.5rem;">
+            1.1 sec avg
+          </div>
+        </div>
+
+        <div class="metric-audit-box">
+          <div class="seq">02</div>
+          <div class="name">Plan feasibility</div>
+          <div class="question">What share of proposed plans pass rule checks?</div>
+          <div style="font-size: 1.75rem; font-weight: 800; color: var(--emerald); font-family: var(--font-mono); margin-top: 0.5rem;">
+            100%
+          </div>
+        </div>
+
+        <div class="metric-audit-box">
+          <div class="seq">03</div>
+          <div class="name">Duplicate safety</div>
+          <div class="question">Do repeated events create zero duplicate side effects?</div>
+          <div style="font-size: 1.75rem; font-weight: 800; color: var(--emerald); font-family: var(--font-mono); margin-top: 0.5rem;">
+            0 Duplicates
+          </div>
+        </div>
+
+        <div class="metric-audit-box">
+          <div class="seq">04</div>
+          <div class="name">Approval traceability</div>
+          <div class="question">Can every gated action be tied to a valid decision?</div>
+          <div style="font-size: 1.75rem; font-weight: 800; color: var(--teal-accent); font-family: var(--font-mono); margin-top: 0.5rem;">
+            100% Gated
+          </div>
+        </div>
+      </div>
+
+      <!-- Interactive Acceptance Check Suite Runner (Slide 11 Bottom Left) -->
+      <div class="test-suite-card">
+        <div class="test-header-bar">
+          <div>
+            <h3 style="font-size: 1.1rem; font-weight: 800; color: #fff;">DEMO ACCEPTANCE CHECKS</h3>
+            <p style="font-size: 0.78rem; color: var(--text-muted);">Deterministic validation against synthetic scenarios</p>
+          </div>
+          <button class="btn-primary" onclick="window.HospitalOps.runAcceptanceTests()">
+            ▶ Run Acceptance Test Suite
+          </button>
+        </div>
+
+        <div class="test-item-row">
+          <div class="test-item-left">
+            <span class="test-icon-badge pass" id="test-1-icon">✓</span>
+            <span class="test-name">New incident creates a persisted record and audit entry</span>
+          </div>
+          <span class="test-status-text" id="test-1-status">PASS</span>
+        </div>
+
+        <div class="test-item-row">
+          <div class="test-item-left">
+            <span class="test-icon-badge pass" id="test-2-icon">✓</span>
+            <span class="test-name">Duplicate webhook is safely ignored or linked</span>
+          </div>
+          <span class="test-status-text" id="test-2-status">PASS</span>
+        </div>
+
+        <div class="test-item-row">
+          <div class="test-item-left">
+            <span class="test-icon-badge pass" id="test-3-icon">✓</span>
+            <span class="test-name">Unavailable part blocks an infeasible recovery plan</span>
+          </div>
+          <span class="test-status-text" id="test-3-status">PASS</span>
+        </div>
+
+        <div class="test-item-row">
+          <div class="test-item-left">
+            <span class="test-icon-badge pass" id="test-4-icon">✓</span>
+            <span class="test-name">Unauthorized and self-approval attempts are rejected</span>
+          </div>
+          <span class="test-status-text" id="test-4-status">PASS</span>
+        </div>
+      </div>
+
+      <!-- 4-Person Build Team Workstreams (Slide 12) -->
+      <div class="panel-box">
+        <h3 style="font-size: 1.15rem; font-weight: 800; color: #fff; margin-bottom: 0.25rem;">FOUR-PERSON BUILD TEAM WORKSTREAMS</h3>
+        <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 1.25rem;">Shared contract first: schema • API payloads • state transitions • demo script</p>
+
+        <div class="team-grid-4col">
+          <div class="team-card">
+            <div class="team-role-num">ROLE 01</div>
+            <div class="team-role-title">Frontend & UX</div>
+            <div class="team-role-tasks">Web dashboard, mobile view, recovery comparison, live telemetry cards</div>
+          </div>
+          <div class="team-card">
+            <div class="team-role-num">ROLE 02</div>
+            <div class="team-role-title">Backend & database</div>
+            <div class="team-role-tasks">FastAPI endpoints, PostgreSQL models, RBAC middleware, audit trail logging</div>
+          </div>
+          <div class="team-card">
+            <div class="team-role-num">ROLE 03</div>
+            <div class="team-role-title">Rules & recovery engine</div>
+            <div class="team-role-tasks">Impact mapping, resource checks, plan feasibility, revalidation gates</div>
+          </div>
+          <div class="team-card">
+            <div class="team-role-num">ROLE 04</div>
+            <div class="team-role-title">AI & integration</div>
+            <div class="team-role-tasks">NLP parsing, summaries, webhook ingestion, notification dispatch</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         VIEW 9: 13-SLIDE PRESENTATION DECK VIEWER (All 13 Slides in 16:9 Mode)
+         ==================================================================== -->
+    <section id="view-slides" class="view-section">
+      <div class="deck-view-container">
+        <!-- Deck Navigation Bar -->
+        <div class="deck-nav-bar">
+          <div style="display: flex; align-items: center; gap: 0.75rem;">
+            <span style="font-weight: 800; color: #fff; font-size: 0.95rem;">PRESENTATION VIEWER</span>
+            <span id="slide-counter-text" style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--teal-accent);">Slide 1 of 13</span>
+          </div>
+
+          <div class="deck-controls">
+            <button class="btn-secondary" onclick="window.HospitalOps.prevSlide()">◀ Previous</button>
+            <select id="slide-jump-select" class="role-select" onchange="window.HospitalOps.jumpToSlide(this.value)">
+              <option value="1">Slide 1: Hero & Pitch</option>
+              <option value="2">Slide 2: The Challenge</option>
+              <option value="3">Slide 3: Our Approach</option>
+              <option value="4">Slide 4: Product Experience</option>
+              <option value="5">Slide 5: How It Works</option>
+              <option value="6">Slide 6: Scenario 01: Recovery Options</option>
+              <option value="7">Slide 7: Scenario 02: Duplicate Correlator</option>
+              <option value="8">Slide 8: What-If Simulator</option>
+              <option value="9">Slide 9: Technology Architecture</option>
+              <option value="10">Slide 10: Governance & Trust</option>
+              <option value="11">Slide 11: Measurement & Acceptance</option>
+              <option value="12">Slide 12: Demo Scope & Build Team</option>
+              <option value="13">Slide 13: The Takeaway Loop</option>
+            </select>
+            <button class="btn-primary" onclick="window.HospitalOps.nextSlide()">Next ▶</button>
+          </div>
+        </div>
+
+        <!-- 16:9 Presentation Frame -->
+        <div class="deck-slide-frame" id="presentation-frame">
+          <div class="slide-top-header">
+            <div class="slide-deck-brand">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="var(--teal-accent)"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+              HOSPITALOPS
+            </div>
+            <div class="slide-category" id="deck-slide-category">HACKATHON PITCH • HEALTHCARE OPERATIONS</div>
+          </div>
+
+          <div class="slide-body-content">
+            <h2 id="deck-slide-title" style="font-size: 2.3rem; font-weight: 900; color: #fff; line-height: 1.2; margin-bottom: 0.75rem; max-width: 900px;">
+              From hospital disruptions to coordinated recovery.
+            </h2>
+            <p id="deck-slide-desc" style="font-size: 1.05rem; color: var(--text-secondary); max-width: 800px;">
+              An AI-assisted hospital operations platform that connects incidents, equipment, staffing, inventory and approvals.
+            </p>
+
+            <!-- Dynamic widget zone for active slide -->
+            <div id="deck-slide-body"></div>
+          </div>
+
+          <div class="slide-footer-bar">
+            <span>HospitalOps Intelligence • Hackathon Pitch</span>
+            <span>Use Left/Right arrow keys or Next/Previous buttons</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Incident Intake Modal (Slide 3 Step 01) -->
+  <div class="modal-overlay" id="intake-modal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3>Report New Operational Incident</h3>
+        <button class="close-modal-btn" id="close-intake-modal-btn">&times;</button>
+      </div>
+
+      <form id="incident-intake-form">
+        <div class="form-group">
+          <label>Disruption Title</label>
+          <input type="text" id="new-inc-title" class="form-control" placeholder="e.g. CT Scanner cooling failure" required>
+        </div>
+        <div class="form-group">
+          <label>Department</label>
+          <select id="new-inc-dept" class="form-control">
+            <option value="Imaging">Radiology / Imaging</option>
+            <option value="IT / Telecom">IT & Telecommunications</option>
+            <option value="Surgical Stores">Surgical Supply / Inventory</option>
+            <option value="Facilities">Facilities & HVAC</option>
+            <option value="Emergency">Emergency Trauma</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Location / Room</label>
+          <input type="text" id="new-inc-loc" class="form-control" placeholder="e.g. Suite Rad-104" required>
+        </div>
+        <div class="form-group">
+          <label>Description & Observed Symptoms</label>
+          <textarea id="new-inc-desc" class="form-control" rows="3" placeholder="Describe symptoms or paste telemetry error code..."></textarea>
+        </div>
+
+        <div style="display: flex; gap: 0.75rem; justify-content: flex-end; margin-top: 1.5rem;">
+          <button type="button" class="btn-secondary" onclick="document.getElementById('intake-modal').classList.remove('open')">Cancel</button>
+          <button type="submit" class="btn-primary">Submit to Intake Engine</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Notification Toast -->
+  <div class="toast-notice" id="app-toast"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
+
